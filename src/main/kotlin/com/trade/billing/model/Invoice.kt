@@ -21,10 +21,10 @@ class Invoice {
     var code: String? = null
 
     @Column(name = "create_at", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    var createdAt: BigDecimal? = null
+    var createdAt: Timestamp? = null
 
     @Column(name = "total", precision = 10, scale = 2)
-    var total: Long? = null
+    var total: BigDecimal? = null
 
     @Column(name = "client_id")
     var clientId: Long? = null
