@@ -17,16 +17,17 @@ import java.util.*
 class ProductService {
     @Autowired
     lateinit var productRepository: ProductRepository
-    fun list (pageable: Pageable,product:Product):Page<Product>{
+
+    fun list(product: Product): List<Product> {
         val matcher = ExampleMatcher.matching()
-                .withIgnoreNullValues()
-                .withMatcher(("fullName"), ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase())
-        return productRepository.findAll(Example.of(product, matcher), pageable)
+            .withIgnoreNullValues()
+            .withMatcher(("fullName"), ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase());
+        return productRepository.findAll(Example.of(product, matcher));
     }
 
     fun listDto(): List<ProductDto>{
         val productList= productRepository.findAll()
-        //crear lista mutable
+        //lista mutable
         val productDtoList= mutableListOf<ProductDto>()
         //map productList
         productList.map{product ->
@@ -42,33 +43,32 @@ class ProductService {
     }
 
     //PETICIONES POST
-    //clase service
-    fun save(modelo: Product): Product{
+    fun save(product: Product): Product{
         try{
-            return productRepository.save(modelo)
+            return productRepository.save(product)
         }
         catch (ex:Exception){
             throw ResponseStatusException(HttpStatus.NOT_FOUND,ex.message)
         }
     }
     //clase service -Petición put
-    fun update(modelo: Product): Product{
+    fun update(product: Product): Product{
         try {
-            productRepository.findById(modelo.id)
-                    ?: throw Exception("ID no existe")
+            productRepository.findById(product.id)
+                ?: throw Exception("ID no existe")
 
-            return productRepository.save(modelo)
+            return productRepository.save(product)
         }
         catch (ex:Exception){
             throw ResponseStatusException(HttpStatus.NOT_FOUND,ex.message)
         }
     }
 
-    //clase service - Delete by id
+    //Delete by id
     fun delete (id: Long?):Boolean?{
         try{
             val response = productRepository.findById(id)
-                    ?: throw Exception("ID no existe")
+                ?: throw Exception("ID no existe")
             productRepository.deleteById(id!!)
             return true
         }

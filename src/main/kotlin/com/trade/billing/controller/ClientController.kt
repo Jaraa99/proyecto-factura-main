@@ -11,13 +11,13 @@ import java.util.*
 
 @CrossOrigin(methods = [RequestMethod.GET, RequestMethod.POST, RequestMethod.PATCH, RequestMethod.PUT, RequestMethod.DELETE])
 @RestController
-@RequestMapping("/client-app")
+@RequestMapping("/client")
 class ClientController {
     @Autowired
     lateinit var clientService: ClientService
     @GetMapping
-    fun list (client:Client, pageable: Pageable):ResponseEntity<*>{
-        val response= clientService.list(pageable,client)
+    fun list(client: Client): ResponseEntity<List<Client>> {
+        val response = clientService.list(client)  // Call the modified service method
         return ResponseEntity(response, HttpStatus.OK)
     }
 //@RequestParam searchValue:String
@@ -29,20 +29,20 @@ class ClientController {
 
     //Peticiones post - Clase controller
     @PostMapping
-    fun save (@RequestBody modelo: Client): ResponseEntity<Client> {
-        return ResponseEntity(clientService.save(modelo), HttpStatus.OK)
+    fun save (@RequestBody client: Client): ResponseEntity<Client> {
+        return ResponseEntity(clientService.save(client), HttpStatus.OK)
     }
 
     //clase controller - Petición Put
     @PutMapping
-    fun update (@RequestBody modelo: Client): ResponseEntity<Client> {
-        return ResponseEntity(clientService.update(modelo), HttpStatus.OK)
+    fun update (@RequestBody client: Client): ResponseEntity<Client> {
+        return ResponseEntity(clientService.update(client), HttpStatus.OK)
     }
 
     //clase  controller-Petiicon Patch
     @PatchMapping
-    fun updateName (@RequestBody modelo: Client): ResponseEntity<Client> {
-        return ResponseEntity(clientService.update(modelo), HttpStatus.OK)
+    fun updateName (@RequestBody client: Client): ResponseEntity<Client> {
+        return ResponseEntity(clientService.update(client), HttpStatus.OK)
     }
 
     //clase  controller - Petición Delete

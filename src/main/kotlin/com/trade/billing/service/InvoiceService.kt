@@ -29,34 +29,34 @@ class InvoiceService {
     }
 
     // PETICIONES POST
-    fun save(modelo: Invoice): Invoice {
+    fun save(invoice: Invoice): Invoice {
         try {
-            clientRepository.findById(modelo.clientId) // Usar "modelo.authorId" en lugar de "modelo.clientId"
-                    ?: throw Exception("Id del autor no encontrado")
-            return invoiceRepository.save(modelo)
+            clientRepository.findById(invoice.clientId)
+                ?: throw Exception("Id no encontrado")
+            return invoiceRepository.save(invoice)
         } catch (ex: Exception) {
             throw ResponseStatusException(
-                    HttpStatus.NOT_FOUND, ex.message)
+                HttpStatus.NOT_FOUND, ex.message)
         }
     }
 
-    // clase service -Petición put
-    fun update(modelo: Invoice): Invoice {
+    //put
+    fun update(invoice: Invoice): Invoice {
         try {
-            invoiceRepository.findById(modelo.id)
-                    ?: throw Exception("ID no existe")
+            invoiceRepository.findById(invoice.id)
+                ?: throw Exception("ID no existe")
 
-            return invoiceRepository.save(modelo)
+            return invoiceRepository.save(invoice)
         } catch (ex: Exception) {
             throw ResponseStatusException(HttpStatus.NOT_FOUND, ex.message)
         }
     }
 
-    // clase service - Delete by id
+    //Delete by id
     fun delete(id: Long?): Boolean? {
         try {
             val response = invoiceRepository.findById(id)
-                    ?: throw Exception("ID no existe")
+                ?: throw Exception("ID no existe")
             invoiceRepository.deleteById(id!!)
             return true
         } catch (ex: Exception) {

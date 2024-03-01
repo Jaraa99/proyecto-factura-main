@@ -1,8 +1,10 @@
-package Config
+package com.trade.billing.config
 
+import com.auth0.jwt.JWT
+import com.auth0.jwt.algorithms.Algorithm
+import com.auth0.jwt.exceptions.JWTVerificationException
 import com.trade.billing.repository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties.Jwt
 import org.springframework.stereotype.Component
 import java.util.Date
 import java.util.concurrent.TimeUnit
@@ -18,7 +20,7 @@ class JwtUtil {
         val userEntity = userRepository.findByUsername(username!!)
         val roles: Array<String?> = userEntity?.roles?.map {
                 role -> role.role }!!.toTypedArray()
-        return Jwt.create()
+        return JWT.create()
             .withArrayClaim("roles", roles)
             .withSubject(username)
             .withIssuer("app-admin")

@@ -1,13 +1,16 @@
-package Config
+package com.trade.billing.Config
 
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
-import org.apache.catalina.User
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
+import org.springframework.security.core.context.SecurityContextHolder
+import org.springframework.security.core.userdetails.User
+import org.springframework.security.core.userdetails.UserDetailsService
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource
 import org.springframework.stereotype.Component
 import org.springframework.web.filter.OncePerRequestFilter
-import java.net.http.HttpHeaders
 
 @Component
 class JwtFilter: OncePerRequestFilter() {
@@ -23,7 +26,7 @@ class JwtFilter: OncePerRequestFilter() {
         filterChain: FilterChain
     ) {
         // 1. Validar que sea un Header Authorization valido
-        val authHeader = request.getHeader(HttpHeaders.AUTHORIZATION)
+        val authHeader = request.getHeader(org.springframework.http.HttpHeaders.AUTHORIZATION)
         if (authHeader == null || authHeader.isEmpty() || !authHeader.startsWith("Bearer")) {
             filterChain.doFilter(request, response)
             return
@@ -48,6 +51,4 @@ class JwtFilter: OncePerRequestFilter() {
         SecurityContextHolder.getContext().authentication= authenticationToken
         filterChain.doFilter(request, response)
     }
-
-
 }

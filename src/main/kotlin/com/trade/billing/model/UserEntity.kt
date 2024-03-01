@@ -30,6 +30,4 @@ class UserEntity {
     var disabled: Boolean? = null
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     var roles: List<RoleEntity>? = null
-
-
 }

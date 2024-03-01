@@ -14,17 +14,11 @@ class Client {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     var id: Long? = null
-
-    @Column(name = "nui", unique = true)
     var nui: String? = null
 
     @Column(name = "fullname")
     var fullName: String? = null
-
-    @Column(name = "address")
     var address: String? = null
-
-    @Column(name = "email")
     var email: String?= null
 }
 

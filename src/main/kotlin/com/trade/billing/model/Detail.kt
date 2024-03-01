@@ -18,8 +18,7 @@ class Detail {
     @Column(name = "id")
     var id: Long? = null
 
-    @Column(name = "quantity")
-    var quantity: Int? = null
+    var quantity: Int = 0
 
     @Column(name = "price", precision = 10, scale = 2)
     var price: BigDecimal? = null
@@ -27,14 +26,6 @@ class Detail {
     @Column(name = "invoice_id")
     var invoiceId: Long? = null
 
-    @ManyToOne
-    @JoinColumn(name = "invoice_id", insertable = false, updatable = false)
-    var invoice: Invoice? = null
-
     @Column(name = "product_id")
     var productId: Long? = null
-
-    @ManyToOne
-    @JoinColumn(name = "product_id", insertable = false, updatable = false)
-    var product: Product? = null
 }

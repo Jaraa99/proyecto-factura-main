@@ -10,7 +10,7 @@ import java.util.*
 
 @CrossOrigin(methods = [RequestMethod.GET, RequestMethod.POST, RequestMethod.PATCH, RequestMethod.PUT, RequestMethod.DELETE])
 @RestController
-@RequestMapping("/invoice-app")
+@RequestMapping("/invoice")
 class InvoiceController {
     @Autowired
     lateinit var invoiceService: InvoiceService
@@ -28,25 +28,25 @@ class InvoiceController {
         return ResponseEntity(invoiceService.filterTotal(value), HttpStatus.OK)
     }
 
-    //Peticiones post - Clase controller
+    //Peticiones post
     @PostMapping
-    fun save (@RequestBody modelo: Invoice): ResponseEntity<Invoice> {
-        return ResponseEntity(invoiceService.save(modelo), HttpStatus.OK)
+    fun save (@RequestBody invoice: Invoice): ResponseEntity<Invoice> {
+        return ResponseEntity(invoiceService.save(invoice), HttpStatus.OK)
     }
 
-    //clase controller - Petición Put
+    //Petición Put
     @PutMapping
-    fun update (@RequestBody modelo: Invoice): ResponseEntity<Invoice> {
-        return ResponseEntity(invoiceService.update(modelo), HttpStatus.OK)
+    fun update (@RequestBody invoice: Invoice): ResponseEntity<Invoice> {
+        return ResponseEntity(invoiceService.update(invoice), HttpStatus.OK)
     }
 
-    //clase  controller-Petiicon Patch
+    //Petiicon Patch
     @PatchMapping
-    fun updateName (@RequestBody modelo: Invoice): ResponseEntity<Invoice> {
-        return ResponseEntity(invoiceService.update(modelo), HttpStatus.OK)
+    fun updateName (@RequestBody invoice: Invoice): ResponseEntity<Invoice> {
+        return ResponseEntity(invoiceService.update(invoice), HttpStatus.OK)
     }
 
-    //clase  controller - Petición Delete
+    //Petición Delete
     @DeleteMapping("/delete/{id}")
     fun delete (@PathVariable("id") id: Long):Boolean?{
         return invoiceService.delete(id)

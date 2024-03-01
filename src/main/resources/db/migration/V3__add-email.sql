@@ -1,5 +1,5 @@
 ALTER TABLE client
-   ADD COLUMN email VARCHAR(50);
+   ADD COLUMN email VARCHAR(50)
 
 
 

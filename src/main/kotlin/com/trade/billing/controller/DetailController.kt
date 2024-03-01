@@ -10,7 +10,7 @@ import java.util.*
 
 @CrossOrigin(methods = [RequestMethod.GET, RequestMethod.POST, RequestMethod.PATCH, RequestMethod.PUT, RequestMethod.DELETE])
 @RestController
-@RequestMapping("/detail-app")
+@RequestMapping("/detail")
 class DetailController {
     @Autowired
     lateinit var detailService: DetailService
@@ -26,20 +26,20 @@ class DetailController {
 
     //Peticiones post - Clase controller
     @PostMapping
-    fun save (@RequestBody modelo: Detail): ResponseEntity<Detail> {
-        return ResponseEntity(detailService.save(modelo), HttpStatus.OK)
+    fun save (@RequestBody detail: Detail): ResponseEntity<Detail> {
+        return ResponseEntity(detailService.save(detail), HttpStatus.OK)
     }
 
     //clase controller - Petición Put
     @PutMapping
-    fun update (@RequestBody modelo: Detail): ResponseEntity<Detail> {
-        return ResponseEntity(detailService.update(modelo), HttpStatus.OK)
+    fun update (@RequestBody detail: Detail): ResponseEntity<Detail> {
+        return ResponseEntity(detailService.update(detail), HttpStatus.OK)
     }
 
     //clase  controller-Petiicon Patch
     @PatchMapping
-    fun updateName (@RequestBody modelo: Detail): ResponseEntity<Detail> {
-        return ResponseEntity(detailService.update(modelo), HttpStatus.OK)
+    fun updateName (@RequestBody detail: Detail): ResponseEntity<Detail> {
+        return ResponseEntity(detailService.update(detail), HttpStatus.OK)
     }
 
     //clase  controller - Petición Delete

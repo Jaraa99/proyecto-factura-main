@@ -15,16 +15,10 @@ class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     var id: Long? = null
-
-    @Column(name = "description")
     var description: String? = null
-
-    @Column(name = "brand")
     var brand: String? = null
 
     @Column(name = "price", precision = 10, scale = 2)
     var price: BigDecimal? = null
-
-    @Column(name = "stock")
-    var stock: Int? = null
+    var stock: Int=0
 }
